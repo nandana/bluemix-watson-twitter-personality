@@ -19,8 +19,8 @@ public class MachineTranslationService extends WatsonService {
 
     private static Logger logger = Logger.getLogger(MachineTranslationService.class.getName());
 
-    public static final String ES_TO_EN = "mt-enus-eses";
-    public static final String EN_TO_ES = "mt-eses-enus";
+    public static final String EN_TO_ES = "mt-enus-eses";
+    public static final String ES_TO_EN = "mt-eses-enus";
     public static final String EN_TO_FR = "mt-enus-frfr";
     public static final String EN_TO_PT = "mt-enus-ptbr";
     public static final String FR_TO_EN = "mt-frfr-enus";
