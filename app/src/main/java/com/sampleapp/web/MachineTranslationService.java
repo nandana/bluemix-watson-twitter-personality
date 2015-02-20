@@ -34,6 +34,9 @@ public class MachineTranslationService extends WatsonService {
 
     public String translate(String text, String sid) throws IOException, URISyntaxException {
 
+        logger.info("Text to translate :" + text);
+        logger.info("Translation type :" + sid);
+
         List<NameValuePair> qparams = new ArrayList<NameValuePair>();
         qparams.add(new BasicNameValuePair("txt",text ));
         qparams.add(new BasicNameValuePair("sid",sid ));
@@ -49,6 +52,8 @@ public class MachineTranslationService extends WatsonService {
         ).returnContent().asBytes();
 
         String response = new String (responseB,"UTF-8");
+
+        logger.info("Translation response :" + response);
 
         return response;
 
