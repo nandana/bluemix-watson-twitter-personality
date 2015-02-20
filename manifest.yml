@@ -1,0 +1,13 @@
+---
+declared-services:
+  cloudant-JTIA:
+    label: cloudantNoSQLDB
+    plan: Shared
+applications:
+- name: tweets
+  memory: 256M
+  instances: 1
+  path: bluemix-java-twitter-influence-analyzer.war
+  services:
+    - cloudant-JTIA
+  host: tweets
