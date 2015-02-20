@@ -76,100 +76,11 @@ public class DispCalc extends HttpServlet {
 				retweetCount += (int) tweet.getRetweetCount();
 			}
 
-			System.out.println("The rtcount is: " + retweetCount);
 
-			int mentionCount = 0;
-
-			int retweetScore = 0;
-			int followerScore = 0;
-
-			if (retweetCount >= 100000)
-				retweetScore = 60;
-			else if (retweetCount >= 20000)
-				retweetScore = 50;
-			else if (retweetCount >= 10000)
-				retweetScore = 40;
-			else if (retweetCount >= 5000)
-				retweetScore = 30;
-			else if (retweetCount >= 1000)
-				retweetScore = 20;
-			else if (retweetCount >= 500)
-				retweetScore = 10;
-			else if (retweetCount >= 100)
-				retweetScore = 5;
-			else if (retweetCount >= 10)
-				retweetScore = 1;
-
-			if (followerCount >= 10000000)
-				followerScore = 40;
-			else if (followerCount >= 1000000)
-				followerScore = 35;
-			else if (followerCount >= 500000)
-				followerScore = 30;
-			else if (followerCount >= 100000)
-				followerScore = 25;
-			else if (followerCount >= 1000)
-				followerScore = 20;
-			else if (followerCount >= 500)
-				followerScore = 15;
-			else if (followerCount >= 100)
-				followerScore = 10;
-			else if (followerCount >= 10)
-				followerScore = 5;
-
-
-			// Search API call to calculate the mentions out of 100
-			Query query = new Query("@" + twitterUsername);
-			query.setCount(100);
-			query.setResultType(Query.RECENT);
-			QueryResult result = twitter.search(query);
-			mentionCount += result.getTweets().size();
-
-			System.out.println("the mcount is: " + mentionCount);
-
-			// Calculate the total score of the user.
-			int totalscore = retweetScore + followerScore + mentionCount;
-
-			System.out.println("The total score is: " + totalscore);
-
-			// tweets to be displayed on the google maps 
-			Query query1 = new Query("@" + twitterUsername);
-			query.setCount(20);
-			query.setResultType(Query.RECENT);
-			QueryResult result1 = twitter.search(query1);
-
-//TODO: Add Klout API back in using user defined variables.
-			//  Klout API calls 
-//			Properties prop = new Properties();
-			//load a properties file from the classpath
-//			prop.load(getClass().getClassLoader().getResourceAsStream("klout.properties"));
-//			String kloutKey = prop.getProperty("kloutkey"); 
-
-//			Klout klout = new Klout(kloutKey);
-
-			String kloutScore = "";
-
-			try {
-//				wrapper.User kUser = klout.getUser(twitterUsername);
-//				double kScore = kUser.score();
-//				kloutScore = Double.toString(kScore);
-			} catch (Exception e){
-				e.printStackTrace();
-				kloutScore = "n/a";
-			}
-
-			request.setAttribute("totalscore", totalscore);
 			request.setAttribute("t_name", twitterUsername);
-			request.setAttribute("fcount", followerCount);
-			request.setAttribute("fscore", followerScore);
-			request.setAttribute("rtcount", retweetCount);
-			request.setAttribute("rtscore", retweetScore);
-			request.setAttribute("mcount", mentionCount);
 			request.setAttribute("rtweets", retweets);
-			request.setAttribute("result1", result1);
-			request.setAttribute("score", kloutScore);  
 
-			request.getRequestDispatcher("/result.jsp").forward(request, response);
+			request.getRequestDispatcher("/myTweets.jsp").forward(request, response);
 		} catch (TwitterException e) {
 
 			e.printStackTrace();
