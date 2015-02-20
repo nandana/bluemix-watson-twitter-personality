@@ -79,15 +79,19 @@
           <table class="table table-condensed">
             <tr>
               <td>Tweet Text</td>
+              <td>Language</td>
             </tr>
             <%
               @SuppressWarnings("unchecked")
               java.util.List<twitter4j.Status> rtweets  = (java.util.List<twitter4j.Status>) request.getAttribute("rtweets");
+              java.util.List<String> langs = (java.util.List<String>) request.getAttribute("langs");
+              int count = 0;
               for ( twitter4j.Status tweet : rtweets) {
                 String tweetText = tweet.getText();
             %>
             <tr>
               <td><%= tweetText %></td>
+              <td><%= langs.get(count++) %></td>
             </tr>
             <%
               }
