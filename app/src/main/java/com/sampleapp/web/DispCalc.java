@@ -32,7 +32,9 @@ public class DispCalc extends HttpServlet {
 	private String access_token;
 	private String access_key;
 
-	LanguageIdentificationService lid;
+	LanguageIdentificationService languageIdentification;
+
+	MachineTranslationService machineTranslation;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -71,11 +73,22 @@ public class DispCalc extends HttpServlet {
 			List<Status> retweets = twitter.getUserTimeline(twitterUsername, new Paging(1, 10)); // get the first ten tweets
 			int retweetCount = 0;
 			List<String> langs = new ArrayList<>();
+			List<String> translated = new ArrayList<>();
 
 			for (Status tweet : retweets) {
 				String tweetText = tweet.getText();
 				try {
-					langs.add(lid.getLang(tweetText));
+					String lang = languageIdentification.getLang(tweetText);
+					langs.add(lang);
+					String englishText;
+					//TODO do the same for french and portuguese
+					if (LanguageIdentificationService.ES_ES.equals(lang)) {
+						englishText = machineTranslation.translate(tweetText, MachineTranslationService.ES_TO_EN);
+					} else {
+						englishText = tweetText;
+					}
+					translated.add(englishText);
+
 				} catch (Exception e) {
 					// Log something and return an error message
 					logger.log(Level.SEVERE, "got error: "+e.getMessage(), e);
@@ -87,6 +100,7 @@ public class DispCalc extends HttpServlet {
 			request.setAttribute("t_name", twitterUsername);
 			request.setAttribute("rtweets", retweets);
 			request.setAttribute("langs", langs);
+			request.setAttribute("translated", translated);
 
 			request.getRequestDispatcher("/myTweets.jsp").forward(request, response);
 		} catch (TwitterException e) {
@@ -111,7 +125,8 @@ public class DispCalc extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		lid = new LanguageIdentificationService();
+		languageIdentification = new LanguageIdentificationService();
+		machineTranslation = new MachineTranslationService();
 	}
 
 }

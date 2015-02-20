@@ -14,8 +14,15 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class LanguageIdentificationService extends WatsonService {
+
+    private static Logger logger = Logger.getLogger(LanguageIdentificationService.class.getName());
+
+    public static final String ES_ES = "es-ES";
+
+    public static final String EN_US = "en-US";
 
     public LanguageIdentificationService(){
         serviceName = "language_identification";
@@ -41,7 +48,7 @@ public class LanguageIdentificationService extends WatsonService {
 
         JSONObject lang = JSONObject.parse(resp);
 
-        return lang.toString();
+        return lang.get("lang").toString();
 
     }
 

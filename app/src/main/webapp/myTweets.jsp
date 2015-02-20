@@ -99,6 +99,27 @@
           </table>
         </div> <!-- end of the span6 for table-->
       </div> <!-- end of row-fluid for span6 -->
+      <div class="row-fluid">
+        <div>
+          <h3>Last 10 Tweets (Translated):</h3>
+          <table class="table table-condensed">
+            <tr>
+              <td>Tweet Text</td>
+            </tr>
+            <%
+              @SuppressWarnings("unchecked")
+              java.util.List<String> translated  = (java.util.List<String>) request.getAttribute("translated");
+              for ( String tweet : translated) {
+            %>
+            <tr>
+              <td><%= tweet %></td>
+            </tr>
+            <%
+              }
+            %>
+          </table>
+        </div> <!-- end of the span6 for table-->
+      </div> <!-- end of row-fluid for span6 -->
   </div> <!-- end of the container-->
   <script src="/bootstrap-transition.js"></script>
   <script src="/bootstrap-modal.js"></script>
