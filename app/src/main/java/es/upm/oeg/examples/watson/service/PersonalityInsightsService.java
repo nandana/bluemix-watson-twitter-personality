@@ -39,15 +39,18 @@ public class PersonalityInsightsService extends WatsonService {
         HttpResponse httpResponse = response.returnResponse();
         StatusLine statusLine = httpResponse.getStatusLine();
 
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        httpResponse.getEntity().writeTo(os);
+        String responseBody = new String(os.toByteArray());
+
         if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
 
-            ByteArrayOutputStream os = new ByteArrayOutputStream();
-            httpResponse.getEntity().writeTo(os);
-            return new String(os.toByteArray());
+            return responseBody;
 
         } else {
-            String msg = String.format("Personality Insights Service failed - %d %s",
-                    statusLine.getStatusCode(), statusLine.getReasonPhrase());
+
+            String msg = String.format("Personality Insights Service failed - %d %s \n %s",
+                    statusLine.getStatusCode(), statusLine.getReasonPhrase(), response);
             logger.severe(msg);
             throw new RuntimeException(msg);
         }
