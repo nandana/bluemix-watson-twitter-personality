@@ -1,44 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- THIS PRODUCT CONTAINS RESTRICTED MATERIALS OF IBM 5724-H88, 5724-J08, 
-	5724-I63, 5655-W65, COPYRIGHT International Business Machines Corp., 2014 
-	All Rights Reserved * Licensed Materials - Property of IBM US Government 
-	Users Restricted Rights - Use, duplication or disclosure restricted by GSA 
-	ADP Schedule Contract with IBM Corp. -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<repositories>
-		<repository>
-			<releases>
-				<updatePolicy>never</updatePolicy>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-				<updatePolicy>never</updatePolicy>
-			</snapshots>
-			<id>ibm-maven-repo</id>
-			<name>ibm-maven-repo</name>
-			<url>http://public.dhe.ibm.com/ibmdl/export/pub/software/websphere/wasdev/maven/repository/</url>
-		</repository>
-	</repositories>
-
-	<licenses>
-		<license>
-			<name>IBM International License Agreement for Non-Warranted Programs</name>
-			<url>http://public.dhe.ibm.com/ibmdl/export/pub/software/websphere/wasdev/maven/licenses/L-JTHS-8SZMHX/HTML/</url>
-			<distribution>repo</distribution>
-			<comments>Additional notices http://public.dhe.ibm.com/ibmdl/export/pub/software/websphere/wasdev/maven/licenses/L-JTHS-8SZMHX/HTML/notices.html</comments>
-		</license>
-	</licenses>
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.ibm.jstart</groupId>
-	<artifactId>bluemix-java-twitter-influence-analyzer</artifactId>
+	<groupId>es.upm.oeg.examples.watson</groupId>
+	<artifactId>twitter-personality-insights-analyzer</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 
-	<name>bluemix-java-twitter-influence-analyzer</name>
+	<name>Twitter Personality Insights Analyzer</name>
 	<url>http://maven.apache.org</url>
+
+	<licenses>
+		<license>
+			<name>Apache License 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<id>nandana</id>
+			<email>nmihindu@fi.upm.es</email>
+			<organization>Ontology Engineering Group</organization>
+			<organizationUrl>http://www.oeg-upm.net/</organizationUrl>
+		</developer>
+	</developers>
 
 	<dependencies>
 		<dependency>
@@ -54,11 +43,6 @@
 			<version>4.0.2</version>
 		</dependency>
 		<dependency>
-			<groupId>com.cloudant</groupId>
-			<artifactId>cloudant-client</artifactId>
-			<version>1.0.1</version>
-		</dependency>
-		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>fluent-hc</artifactId>
 			<version>4.3.4</version>
@@ -71,7 +55,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>${project.name}</finalName>
+		<finalName>tpi-analyzer</finalName>
 		<plugins>
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
@@ -91,4 +75,20 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<repositories>
+		<repository>
+			<releases>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+				<updatePolicy>never</updatePolicy>
+			</snapshots>
+			<id>ibm-maven-repo</id>
+			<name>ibm-maven-repo</name>
+			<url>http://public.dhe.ibm.com/ibmdl/export/pub/software/websphere/wasdev/maven/repository/</url>
+		</repository>
+	</repositories>
+
 </project>

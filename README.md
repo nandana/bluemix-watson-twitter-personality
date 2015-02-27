@@ -1,16 +1,47 @@
-# How to Run and Deploy the Twitter Influence Analyzer #
+# What is Twitter Personality Insights Analyzer?
+
+This is a simple application that I built to play with [IBM Watson Services](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/services-catalog.html).
+The business logic of the application is simple.
+
+Given a Twitter id,
+* (a) it extracts the last 10 tweets from the timeline
+* (b) uses the [Language Identification](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/language-identification.html) service to identify the language of each tweet
+* (c) if a tweet is not in English, uses the [Machine Translation] service to translate it to English
+* (d) uses the [Personality Insights](http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/personality-insights.html) to build a profile of personality and social characteristics based on the tweets
+
+The main idea was to check how easy/hard it is to build an application using the IBM Watson Services. This application used the [Bluemix Twitter Influence Java Sample](https://github.com/ibmjstart/bluemix-java-sample-twitter-influence-app) and
+getting started java samples from each of the services as a guide.
+
+## Screenshots ##
+
+This is the home screen of the app. You can enter a twitter screen name in the text box and click the Analyze button to see their influence. You can also view any records saved in the database by clicking on the 'View Database' button.
+
+![image](images/home_page.png)
+
+After entering the twitter name and clicking the Analyze button, you'll be able to see the influence analysis of that person on the left side. You will also see their last 10 tweets and any recent mentions in the tweets plotted on Google Maps (if there is geolocation data for a tweet).
+
+![image](images/search_results.png)
+
+These are the records of the Influencers in the database. The user can also delete the records.
+
+![image](images/saved_record.png)
+
+
+# How to Run and Deploy the Twitter Personal Analyzer #
 
 ## Overview of the app ##
 
-This is a Java app that uses the following cloud services:
+This is a Java app that uses the following IBM Watson cloud services:
 
--   Cloudant
+- Language Identification
+- Machine Translation
+- Personality Insights
 
 Give it a try! Click the button below to fork into IBM DevOps Services and deploy your own copy of this application on Bluemix. Note the app will not yet work; you need to set the environment variables.
 
 [![Deploy to Bluemix](images/deploy-button.png)](https://bluemix.net/deploy?repository=https://github.com/ibmjstart/bluemix-java-sample-twitter-influence-app.git)
 
-The environment variables are your twitter and klout API keys.
+The environment variables are your twitter API keys.
 
 To set them, click on your app within Bluemix, click `Environment Variables` on the left pane, then select `USER_DEFINED` to add the three necessary environment variables. Put in your Twitter consumer key, Twitter consumer secret, and Klout key with the EXACT names shown below:
 
@@ -22,57 +53,6 @@ Hit save and you're done!
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
      http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
-
-## Pushing the app using Eclipse ##
-
-### Step 1: Prerequisites ###
-
-#### • Download IBM Bluemix Plug-in ####
-
-You will also need to download the IBM Bluemix plug-in for Eclipse.  To do this, go to Eclipse and follow the instructions below:
-
-  1. Click: Help > Eclipse Marketplace...
-  2. Search: "Bluemix"
-  3. Look for the item titled: "IBM Eclipse Tools for Bluemix" (It should be the first listing)
-  4. Click: Install
-
-![logo](images/bluemix_plugin.png)
-
-### Step 2. Import the project into Eclipse ###
-
-Next, you will need to import the project into [**Eclipse**](https://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/keplersr2).  Recommendation is to use the Eclipse IDE for Java EE Developers.  
-
-#### Import the WAR File ####
-  1. Navigate to https://github.com/ibmjstart/bluemix-java-sample-twitter-influence-app/releases
-  2. Click the green button labeled "twitter_influence_analyzer-1.2.war" and that will download the WAR file.
-  3. Open Eclipse
-  4. Then File->Import
-  5. Scroll down to the "Web" section, expand that section and click WAR File then click Next.
-  6. Select the war file from where it was downloaded. Ensure that `Target Runtime` is targeting IBM Bluemix.
-  7. Click `Next` and then `Finish` and the project should be imported into Eclipse
-
-### Step 3. Acquiring External and Public APIs ###
-
-**Your app will not work if you do not add your Twitter API keys and access Tokens to your environment variable.**
-
-This app uses some external APIs. You need to register the app with Twitter to get the keys and tokens.
-
-#### • Twitter v1.1 API ####
-
-To access the Twitter API you need the consumer keys and access tokens, so you must register the app with Twitter. You can register your app [here](https://dev.twitter.com/).
-
-When you set up your twitter application settings, it will ask for the fully-qualified URL to your website. This should match, exactly, the URL you plan to use for your bluemix app.
-For example, if your Bluemix app will be located at `http://jstart-tia.mybluemix.net`, then the `Website` text box under Create an Application should read that exact URL. You will have to match this
-to the subdomain that you give when your app is deployed.
-
-
-[More information on how to register the app with Twitter](registerTwitter.md)
-
-#### • Google Maps v3 API ####
-
-This app uses the Google Maps v3 APIs. Google APIs are open for the developers and you do not need to register the app with Google. Here's the [link](https://developers.google.com/maps/documentation/javascript/tutorial) for the Google Maps APIs.
 
 ### Step 4. Deploying the app ###
 
@@ -155,17 +135,3 @@ Another option is to add the environment variables through ACE.
   1. Navigate to the main dashboard view in Bluemix
   2. Find your new app on the Dashboard.
   3. Below the name of your app is a link that takes you to the running app.  Click on that link.
-
-## Screenshots ##
-
-This is the home screen of the app. You can enter a twitter screen name in the text box and click the Analyze button to see their influence. You can also view any records saved in the database by clicking on the 'View Database' button.
-
-![image](images/home_page.png)
-
-After entering the twitter name and clicking the Analyze button, you'll be able to see the influence analysis of that person on the left side. You will also see their last 10 tweets and any recent mentions in the tweets plotted on Google Maps (if there is geolocation data for a tweet).
-
-![image](images/search_results.png)
-
-These are the records of the Influencers in the database. The user can also delete the records.
-
-![image](images/saved_record.png)

@@ -2,6 +2,7 @@ package es.upm.oeg.examples.watson.service;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
+import org.apache.http.StatusLine;
 import org.apache.http.client.fluent.Executor;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.client.fluent.Response;
@@ -11,8 +12,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.logging.Logger;
 
 public class PersonalityInsightsService extends WatsonService {
+
+    private static Logger logger = Logger.getLogger(PersonalityInsightsService.class.getName());
 
     public PersonalityInsightsService() {
         serviceName = "personality_insights";
@@ -21,7 +25,10 @@ public class PersonalityInsightsService extends WatsonService {
 
     public String analyse (String text) throws IOException, URISyntaxException {
 
+        logger.info("Analyzing the text: \n" + text);
+
         URI profileURI = new URI(baseURL + "/v2/profile").normalize();
+        logger.info("Profile URI: " + profileURI.toString() );
 
         Request profileRequest = Request.Post(profileURI)
                 .addHeader("Accept", "application/json")
@@ -30,16 +37,19 @@ public class PersonalityInsightsService extends WatsonService {
         Executor executor = Executor.newInstance().auth(username, password);
         Response response = executor.execute(profileRequest);
         HttpResponse httpResponse = response.returnResponse();
+        StatusLine statusLine = httpResponse.getStatusLine();
 
-        if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+        if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
 
             ByteArrayOutputStream os = new ByteArrayOutputStream();
             httpResponse.getEntity().writeTo(os);
             return new String(os.toByteArray());
 
         } else {
-            //TODO handle the exception properly
-            throw new RuntimeException("Personality Insights Service failed");
+            String msg = String.format("Personality Insights Service failed - %d %s",
+                    statusLine.getStatusCode(), statusLine.getReasonPhrase());
+            logger.severe(msg);
+            throw new RuntimeException(msg);
         }
     }
 }
