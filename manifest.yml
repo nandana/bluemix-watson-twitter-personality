@@ -1,13 +1,14 @@
 ---
 declared-services:
-  cloudant-JTIA:
-    label: cloudantNoSQLDB
-    plan: Shared
+  Language-Identification-bt:
+    label: language_identification
 applications:
 - name: tweets
   memory: 256M
   instances: 1
   path: bluemix-java-twitter-influence-analyzer.war
   services:
-    - cloudant-JTIA
+    - mt-service
+    - language_identification
+    - machine_translation
   host: tweets
