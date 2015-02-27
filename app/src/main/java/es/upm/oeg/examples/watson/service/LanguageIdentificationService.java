@@ -1,4 +1,4 @@
-package com.sampleapp.web;
+package es.upm.oeg.examples.watson.service;
 
 import com.ibm.json.java.JSONObject;
 import org.apache.commons.codec.binary.Base64;
@@ -23,6 +23,10 @@ public class LanguageIdentificationService extends WatsonService {
     public static final String ES_ES = "es-ES";
 
     public static final String EN_US = "en-US";
+
+    public static final String FR_FR = "fr-FR";
+
+    public static final String PT_BR = "pt-BR";
 
     public LanguageIdentificationService(){
         serviceName = "language_identification";

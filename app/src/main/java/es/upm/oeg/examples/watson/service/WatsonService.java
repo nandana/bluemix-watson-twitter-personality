@@ -1,4 +1,4 @@
-package com.sampleapp.web;
+package es.upm.oeg.examples.watson.service;
 
 import com.ibm.json.java.JSONArray;
 import com.ibm.json.java.JSONObject;

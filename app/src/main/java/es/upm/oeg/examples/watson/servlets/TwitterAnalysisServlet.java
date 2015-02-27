@@ -2,8 +2,11 @@
 /* Copyright IBM Corp. 2013 All Rights Reserved                      */
 /*-------------------------------------------------------------------*/
 
-package com.sampleapp.web;
+package es.upm.oeg.examples.watson.servlets;
 
+import es.upm.oeg.examples.watson.service.LanguageIdentificationService;
+import es.upm.oeg.examples.watson.service.MachineTranslationService;
+import es.upm.oeg.examples.watson.service.PersonalityInsightsService;
 import twitter4j.*;
 import twitter4j.auth.AccessToken;
 
@@ -21,9 +24,9 @@ import java.util.logging.Logger;
 /**
  * Servlet implementation class DispCalc
  */
-public class DispCalc extends HttpServlet {
+public class TwitterAnalysisServlet extends HttpServlet {
 
-	private static Logger logger = Logger.getLogger(DispCalc.class.getName());
+	private static Logger logger = Logger.getLogger(TwitterAnalysisServlet.class.getName());
 
 	private static final long serialVersionUID = 1L;
 	private Map<String, String> env;
@@ -36,10 +39,12 @@ public class DispCalc extends HttpServlet {
 
 	MachineTranslationService machineTranslation;
 
+	PersonalityInsightsService personalityInsightsService;
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public DispCalc() {
+	public TwitterAnalysisServlet() {
 		super();
 	}
 
@@ -75,6 +80,10 @@ public class DispCalc extends HttpServlet {
 			List<String> langs = new ArrayList<>();
 			List<String> translated = new ArrayList<>();
 
+
+			StringBuilder aggregatedTextBuilder = new StringBuilder();
+			String personalityInsights = null;
+
 			for (Status tweet : retweets) {
 				String tweetText = tweet.getText();
 				try {
@@ -84,10 +93,17 @@ public class DispCalc extends HttpServlet {
 					//TODO do the same for french and portuguese
 					if (LanguageIdentificationService.ES_ES.equals(lang)) {
 						englishText = machineTranslation.translate(tweetText, MachineTranslationService.ES_TO_EN);
+					} else if (LanguageIdentificationService.FR_FR.equals(lang)) {
+						englishText = machineTranslation.translate(tweetText, MachineTranslationService.FR_TO_EN);
+					} else if (LanguageIdentificationService.PT_BR.equals(lang)) {
+						englishText = machineTranslation.translate(tweetText, MachineTranslationService.PT_TO_EN);
 					} else {
 						englishText = tweetText;
 					}
 					translated.add(englishText);
+					aggregatedTextBuilder.append(englishText);
+
+					personalityInsights = personalityInsightsService.analyse(aggregatedTextBuilder.toString());
 
 				} catch (Exception e) {
 					// Log something and return an error message
@@ -101,6 +117,7 @@ public class DispCalc extends HttpServlet {
 			request.setAttribute("rtweets", retweets);
 			request.setAttribute("langs", langs);
 			request.setAttribute("translated", translated);
+			request.setAttribute("personalityInsights", personalityInsights);
 
 			request.getRequestDispatcher("/myTweets.jsp").forward(request, response);
 		} catch (TwitterException e) {
@@ -127,6 +144,7 @@ public class DispCalc extends HttpServlet {
 		super.init();
 		languageIdentification = new LanguageIdentificationService();
 		machineTranslation = new MachineTranslationService();
+		personalityInsightsService = new PersonalityInsightsService();
 	}
 
 }

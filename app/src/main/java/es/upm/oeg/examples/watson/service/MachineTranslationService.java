@@ -1,4 +1,4 @@
-package com.sampleapp.web;
+package es.upm.oeg.examples.watson.service;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.http.NameValuePair;

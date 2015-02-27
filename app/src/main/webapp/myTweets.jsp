@@ -120,6 +120,9 @@
           </table>
         </div> <!-- end of the span6 for table-->
       </div> <!-- end of row-fluid for span6 -->
+      <div>
+        <p>><%= request.getAttribute("personalityInsights") %></p>
+      </div>
   </div> <!-- end of the container-->
   <script src="/bootstrap-transition.js"></script>
   <script src="/bootstrap-modal.js"></script>
