@@ -1,20 +1,8 @@
 ---
 #Manifests can be generated using http://cfmanigen.mybluemix.net/
-declared-services:
-  lang-id:
-    label: language_identification
-  lang-trans:
-     label: machine_translation
-  pers-insights:
-     label: personality_insights
-
 applications:
 - name: tweets
   memory: 256M
   instances: 1
   path: bluemix-java-twitter-influence-analyzer.war
-  services:
-    - lang-id
-    - lang-trans
-    - pers-insights
   host: tweets
