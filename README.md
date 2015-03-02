@@ -14,28 +14,45 @@ getting started java samples from each of the services as a guide.
 
 ## Screenshots ##
 
-This is the home screen of the app. You can enter a twitter screen name in the text box and click the Analyze button to see their influence. You can also view any records saved in the database by clicking on the 'View Database' button.
-
+This is the home screen of the app. You can enter a twitter screen name in the text box and click the Analyze button to see their influence.
 ![image](images/home_page.png)
 
-After entering the twitter name and clicking the Analyze button, you'll be able to see the influence analysis of that person on the left side. You will also see their last 10 tweets and any recent mentions in the tweets plotted on Google Maps (if there is geolocation data for a tweet).
+After entering the twitter name and clicking the Analyze button, the personality results will be shown in the next screen along with the tweets that were used as data.
+![image](images/results.png)
 
-![image](images/search_results.png)
+# Prerequisite #
 
-These are the records of the Influencers in the database. The user can also delete the records.
+## Twitter access token ##
 
-![image](images/saved_record.png)
+This application requires an access token to access the tweets.
+
+### These are some of the steps and screen-shots to register your app with Twitter:
+
+-   You can register the app over [here](https://dev.twitter.com/). When you click on the link you are forwarded to Twitter's developer site. You need to Sign-in with your Twitter account. If you dont have the twitter account you can sign-up with twitter and get then login with the new account credentials. The Sign-in button is on the top right.
+
+    ![image](images/twitHome.png)
+
+-   After logging in with the Twitter credentials, you can manage your existng applications or create/register new applications with Twitter by clicking on 'My Applications' as shown in the screenshot.
+
+    ![image](images/appl.png)
+
+-   Now you can see your existing applications if you have any registered before. You can register the app by clicking on 'Create a new application' button.
+
+    ![image](images/myappl.png)
+
+-   You will now have to fill the application details, agree the rules and the submit the form to register the app.
+
+    ![image](images/app_details.png)
+
+-   After registering the app, you'll see the API key and API
+    secret values under the API Keys tab. To get your API access token, click
+    'Create my access token' at the bottom of the page and you will see the generated access token and access token secret
+    ![image](images/TwitterAPI.png)
+
+-   You can just copy these tokens (API  key, API secret, access token, access token secret) in your application and you are all set to use the Twitter API. You will need to check the [documentation](https://dev.twitter.com/docs/api/1.1) to use the various REST APIs.
 
 
 # How to Run and Deploy the Twitter Personal Analyzer #
-
-## Overview of the app ##
-
-This is a Java app that uses the following IBM Watson cloud services:
-
-- Language Identification
-- Machine Translation
-- Personality Insights
 
 Give it a try! Click the button below to fork into IBM DevOps Services and deploy your own copy of this application on Bluemix. Note the app will not yet work; you need to set the environment variables.
 

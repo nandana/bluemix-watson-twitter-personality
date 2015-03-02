@@ -5,20 +5,15 @@
 	<display-name>bluemix-java-twitter-influence-analyzer</display-name>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
-		<welcome-file>index.htm</welcome-file>
-		<welcome-file>index.jsp</welcome-file>
-		<welcome-file>default.html</welcome-file>
-		<welcome-file>default.htm</welcome-file>
-		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
 	<servlet>
-		<description>Calculates the Influencer information</description>
-		<display-name>DispCalc</display-name>
-		<servlet-name>DispCalc</servlet-name>
+		<description>The servlet that executes the main business logic</description>
+		<display-name>TwitterPersonality</display-name>
+		<servlet-name>TwitterPersonality</servlet-name>
 		<servlet-class>es.upm.oeg.examples.watson.servlets.TwitterAnalysisServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>DispCalc</servlet-name>
-		<url-pattern>/TwitterInfluenceAnalyzer/DispCalc</url-pattern>
+		<servlet-name>TwitterPersonality</servlet-name>
+		<url-pattern>/twitter-personality/results</url-pattern>
 	</servlet-mapping>
 </web-app>

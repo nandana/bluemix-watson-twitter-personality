@@ -75,7 +75,7 @@ public class TwitterAnalysisServlet extends HttpServlet {
 
 			twitter4j.User a_name = twitter.showUser(twitterUsername);
 			int followerCount = a_name.getFollowersCount();
-			List<Status> retweets = twitter.getUserTimeline(twitterUsername, new Paging(1, 10)); // get the first ten tweets
+			List<Status> retweets = twitter.getUserTimeline(twitterUsername, new Paging(1, 20)); // get the first twenty tweets
 			int retweetCount = 0;
 			List<String> langs = new ArrayList<>();
 			List<String> translated = new ArrayList<>();
@@ -118,6 +118,7 @@ public class TwitterAnalysisServlet extends HttpServlet {
 			request.setAttribute("langs", langs);
 			request.setAttribute("translated", translated);
 			request.setAttribute("personalityInsights", personalityInsights);
+			request.setAttribute("aggregatedText", aggregatedTextBuilder.toString());
 
 			request.getRequestDispatcher("/myTweets.jsp").forward(request, response);
 		} catch (TwitterException e) {

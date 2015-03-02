@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title> Twitter Influence Analyzer </title>
+	<title> Twitter Personality App </title>
 	<meta charset="utf8">  
   	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
@@ -108,7 +108,7 @@
       <div class="navbar-inner">
         <div class="container">
           
-          <a class="brand pull-left" href="/index.html"><em>Analyze last 10 tweets </em><small></small></a>
+          <a class="brand pull-left" href="/index.html"><em>Discover your personality </em><small></small></a>
 	  
           <div class="nav-collapse collapse">
            
@@ -122,23 +122,35 @@
   <tr> -->
   <div class="hero-unit">
   <div>
-  <h2 class="text-center"><img src="twitter_logo.png" class="img-rounded"><em>Analyze last 10 tweets</em></h2>
+  <h4 class="text-center"><img src="twitter_logo.png" class="img-rounded"><em>Discover your personality using your Twitter timeline ...</em></h4>
   </div>
   <br/>
+
+
   
-  <form id="search" action="TwitterInfluenceAnalyzer/DispCalc" method="POST" class="form-search">
+  <form id="search" action="twitter-personality/results" method="POST" class="form-search">
   <p style="text-align: center"> 
   <input id="textHandle" type="text" name="twitter_name" value="" placeholder="Enter Twitter Name" class="input-large" onkeyup="checkHandle()"/>
   <input id="analyze" type="submit" value="Analyze!" class="btn btn-info" onclick="checkHandle()" disabled>
   
   </p>
   </form>
-  
-  <p style="text-align:center">
-  <a href="/TwitterInfluenceAnalyzer/DisplayAll" class="btn btn-primary">View Database</a>
+
+  <p style="font-size: medium">Given your Twitter name, this app extracts the last 20 tweets from the timeline and
+	  <ul style="font-size: medium">
+		<li> uses the <a href="http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/language-identification.html">Language Identification</a> service to identify the language of each tweet</li>
+		<li> if a tweet is not in English, uses the <a href="http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/machine-translation.html">Machine Translation</a> service to translate it to English</li>
+		<li> uses the <a href="http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/personality-insights.html">Personality Insights</a> to build a profile of personality and social characteristics based on the tweets</li>
+	  </ul>
   </p>
  
   </div> <!-- end of the hero-unit-->
+
   </div> <!-- end of the container-->
+  <div id="footer">
+	  <div class="container">
+			Developed by <a href="http://nandana.org">Nandana Mihindukulasooriya</a>, <a href="http://www.oeg-upm.net/">Ontology Engineering Group</a>, Universidad Politécnica de Madrid
+	  </div>
+  </div>
 </body>
 </html>
